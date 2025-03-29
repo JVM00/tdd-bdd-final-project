@@ -11,24 +11,15 @@ DRIVER = getenv('DRIVER', 'firefox').lower()
 
 def before_all(context):
     """ Executed once before all tests """
-    service = webdriver.FirefoxService(executable_path='/usr/local/bin/geckodriver')
-   
     context.base_url = BASE_URL
     context.wait_seconds = WAIT_SECONDS
-    
-    options = webdriver.FirefoxOptions()
-    options.add_argument("--headless")
-    
-    context.driver = webdriver.Firefox(service=service, options=options)
-    context.driver.implicitly_wait(context.wait_seconds)
-    
     # Select either Chrome or Firefox
-    #if 'firefox' in DRIVER:
-       # context.driver = get_firefox()
-   # else:
-     #   context.driver = get_chrome()
-    #context.driver.implicitly_wait(context.wait_seconds)
-    #context.config.setup_logging()
+    if 'firefox' in DRIVER:
+        context.driver = get_firefox()
+    else:
+        context.driver = get_chrome()
+    context.driver.implicitly_wait(context.wait_seconds)
+    context.config.setup_logging()
 
 
 def after_all(context):

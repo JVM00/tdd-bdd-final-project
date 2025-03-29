@@ -20,8 +20,6 @@ Product Store Service with UI
 """
 from flask import jsonify, request, abort
 from flask import url_for  # noqa: F401 pylint: disable=unused-import
-from flask import jsonify
-from service.models import Product
 from service.models import Product, Category
 from service.common import status  # HTTP Status Codes
 from . import app
@@ -96,7 +94,7 @@ def create_products():
     return jsonify(message), status.HTTP_201_CREATED, {"Location": location_url}
 
 
-######################################################################
+#######################################################################
 # L I S T   A L L   P R O D U C T S
 ######################################################################
 
